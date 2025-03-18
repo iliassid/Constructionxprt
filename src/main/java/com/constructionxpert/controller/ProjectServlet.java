@@ -16,4 +16,19 @@ import java.util.List;
 })
 public class ProjectServlet extends HttpServlet {
 
+    private ProjectDao projectDao ;
+
+    @Override
+    public void init() throws ServletException {
+        projectDao = new ProjectDao();
+    }
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+        String action = request.getServletPath();
+
+        switch (action) {
+            case "/projects":
+        }
+    }
 }

@@ -111,4 +111,7 @@ public class Project {
     public void setCreatedBy(int createdBy) {
         this.createdBy = createdBy;
     }
+
+    public void setUdatedAt(Timestamp createdAt) {
+    }
 }
