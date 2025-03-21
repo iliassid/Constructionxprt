@@ -21,7 +21,7 @@
 
     /* Navbar Base Styling */
     .navbar {
-        background: linear-gradient(135deg, var(--primary), #1a2530);
+        background: linear-gradient(#360033, #0b8793);
         box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
         padding: 12px 20px;
         transition: all 0.4s ease;
