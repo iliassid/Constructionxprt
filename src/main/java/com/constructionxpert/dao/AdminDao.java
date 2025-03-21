@@ -1,48 +1,58 @@
 package com.constructionxpert.dao;
 
-import com.constructionxpert.config.DBConnection;
-import com.constructionxpert.model.Admin;
+import com.constructionxpert.models.Administrateur;
+import com.constructionxpert.utils.DBConnection;
 import java.sql.*;
 
 public class AdminDao {
 
-    public Admin getAdminByUsername(String username) {
-        String sql = "SELECT * FROM administrators WHERE username = ?";
-        try (Connection conn = DBConnection.getConnection();
-             PreparedStatement stmt = conn.prepareStatement(sql)) {
+    public Administrateur getAdminByUsername(String username) {
+        String sql = "SELECT * FROM administrateur WHERE nom_utilisateur = ?";
+        Administrateur admin = null;
 
-            stmt.setString(1, username);
-            try (ResultSet rs = stmt.executeQuery()) {
+        try (Connection conn = DBConnection.getConnection();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+
+            pstmt.setString(1, username);
+            try (ResultSet rs = pstmt.executeQuery()) {
                 if (rs.next()) {
-                    Admin admin = new Admin();
-                    admin.setAdminId(rs.getInt("admin_id"));
-                    admin.setUsername(rs.getString("username"));
-                    admin.setPasswordHash(rs.getString("password_hash"));
-                    admin.setFullName(rs.getString("full_name"));
-                    admin.setEmail(rs.getString("email"));
-                    admin.setCreatedAt(rs.getTimestamp("created_at"));
-                    admin.setLastLogin(rs.getTimestamp("last_login"));
-                    return admin;
+                    admin = new Administrateur(
+                            rs.getInt("id"),
+                            rs.getString("nom_utilisateur"),
+                            rs.getString("mot_de_passe"),
+                            rs.getString("email"),
+                            rs.getTimestamp("date_creation")
+                    );
                 }
             }
         } catch (SQLException e) {
-            e.printStackTrace(); // Log this properly in a real application
+            e.printStackTrace(); // Log this properly
         }
-        return null; // Return null if no admin is found
+        return admin;
     }
+    public Administrateur getAdminById(int id) {
+        String sql = "SELECT * FROM administrateur WHERE id = ?";
+        Administrateur admin = null;
 
-    // Example: Update last login timestamp
-    public void updateLastLogin(int adminId) {
-        String sql = "UPDATE administrators SET last_login = CURRENT_TIMESTAMP WHERE admin_id = ?";
         try (Connection conn = DBConnection.getConnection();
-             PreparedStatement stmt = conn.prepareStatement(sql)) {
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
 
-            stmt.setInt(1, adminId);
-            stmt.executeUpdate();
+            pstmt.setInt(1, id);
+            try (ResultSet rs = pstmt.executeQuery()) {
+                if (rs.next()) {
+                    admin = new Administrateur();
+                    admin.setId(rs.getInt("id"));
+                    admin.setNomUtilisateur(rs.getString("nom_utilisateur"));
+                    admin.setMotDePasse(rs.getString("mot_de_passe"));
+                    admin.setEmail(rs.getString("email"));
+                    admin.setDateCreation(rs.getTimestamp("date_creation"));
+                }
+            }
         } catch (SQLException e) {
             e.printStackTrace();
+            // Handle exceptions, log errors, or throw custom exceptions
         }
+        return admin;
     }
-
-    // Add other methods as needed (e.g., createAdmin, updateAdmin, etc.)
+    // Add other admin-related methods (create, update, etc.) if needed
 }
