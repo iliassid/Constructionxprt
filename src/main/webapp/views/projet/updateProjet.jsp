@@ -7,6 +7,14 @@
     <title>Update Projet</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/style.css">
+    <style>
+        .btn-primary{
+            background: linear-gradient(to right, #1e870c, #a9a8a8);
+        }
+        .btn-secondary{
+            background: linear-gradient(to right, #212b97, #7b7b7b);
+        }
+    </style>
 </head>
 <body>
 <%@ include file="../includes/header.jsp" %>

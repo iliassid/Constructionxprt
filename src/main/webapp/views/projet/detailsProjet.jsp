@@ -3,7 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
-<c:import url="/includes/header.jsp" />
+<jsp:include page="/views/includes/header.jsp" />
 
 <div class="container mt-5">
     <h1>Détails du Projet</h1>
@@ -23,4 +23,4 @@
     <a href="${pageContext.request.contextPath}/projets" class="btn btn-secondary mt-3">Retour à la liste</a>
 </div>
 
-<c:import url="/includes/footer.jsp" />
+<jsp:include page="/views/includes/footer.jsp" />
