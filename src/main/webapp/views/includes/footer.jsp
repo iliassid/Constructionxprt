@@ -1,6 +1,6 @@
 <!-- Optional: Add a footer if needed -->
 <footer class="mt-5 text-center">
-    <p>© 2024 ConstructionXpert</p>
+    <p>© 2025 ConstructionXpert</p>
 </footer>
 
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>

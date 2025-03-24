@@ -8,27 +8,31 @@
 <style>
     /* Color Variables */
     :root {
-        --primary: #00ff16;
+        --primary: #719c75;
         --secondary: #3498db;
         --accent: #e74c3c;
         --light: #ecf0f1;
-        --dark: #2c3e50;
+        --dark: #324a63;
         --success: #2ecc71;
         --warning: #f39c12;
         --info: #3498db;
         --danger: #e74c3c;
     }
+    li{
+        list-style: none;
+    }
 
     /* Navbar Base Styling */
     .navbar {
-        background: linear-gradient(#360033, #0b8793);
-        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        background-color: #d7dad7;
+        background: linear-gradient(to right, #62ae1f, #626160);
+        box-shadow: 0px 10px 15px rgba(0, 0, 0, 0.374);
         padding: 12px 20px;
         transition: all 0.4s ease;
     }
 
     .navbar-brand {
-        color: white !important;
+        color: rgb(240, 238, 238) !important;
         font-weight: 700;
         font-size: 1.4rem;
         letter-spacing: 0.5px;
@@ -52,8 +56,8 @@
 
     /* Nav Links Styling */
     .navbar .nav-link {
-        color: rgba(255, 255, 255, 0.85) !important;
-        font-weight: 500;
+        color: rgba(243, 240, 240, 0.85) !important;
+        font-weight: 1000;
         margin: 0 5px;
         padding: 10px 15px !important;
         border-radius: 4px;
@@ -68,7 +72,7 @@
     }
 
     .navbar .nav-link:hover {
-        color: white !important;
+        color: rgb(241, 241, 241) !important;
         background-color: rgba(255, 255, 255, 0.1);
         transform: translateY(-3px);
     }
@@ -97,7 +101,7 @@
 
     /* Active State Styling */
     .navbar-nav .nav-item.active .nav-link {
-        color: white !important;
+        color: rgb(226, 226, 226) !important;
         background-color: rgba(52, 152, 219, 0.2);
     }
 
@@ -261,7 +265,7 @@
 
     /* Dark Mode Styles - Apply with JS */
     body.dark-mode .navbar {
-        background: linear-gradient(135deg, #121212, #1e1e1e);
+        background: linear-gradient(135deg, #aa950c, #1e1e1e);
     }
 
     body.dark-mode .dropdown-menu {
@@ -276,12 +280,16 @@
     body.dark-mode .dropdown-item:hover {
         background-color: #3d3d3d;
     }
+    a{
+        text-decoration: none;
+
+    }
 </style>
 
 <nav class="navbar navbar-expand-lg">
     <div class="container-fluid">
         <a class="navbar-brand" href="<%=request.getContextPath()%>/admin/dashboard">
-          ConstructionXpert
+            ConstructionXpert
         </a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -290,22 +298,22 @@
             <ul class="navbar-nav">
                 <li class="nav-item">
                     <a class="nav-link" href="<%=request.getContextPath()%>/projets">
-                         Projets
+                        Projets
                     </a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="<%=request.getContextPath()%>/taches">
-                     Taches
+                        Taches
                     </a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="<%=request.getContextPath()%>/ressources">
-                         Ressources
+                        Ressources
                     </a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="<%=request.getContextPath()%>/fournisseurs">
-                         Fournisseurs
+                        Fournisseurs
                     </a>
                 </li>
             </ul>
