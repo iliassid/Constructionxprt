@@ -7,14 +7,13 @@
     <title>ConstructionXpert - Accueil</title>
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <!-- Font Awesome -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
+
 
         body {
             font-family: 'Arial', sans-serif;
@@ -25,7 +24,7 @@
 
         /* Navbar */
         .navbar {
-            background-color: #333;
+            background-image: linear-gradient(to right,rgb(98, 173, 32), rgb(115, 115, 115));
             padding: 1rem 2rem;
             position: fixed;
             width: 100%;
@@ -42,18 +41,13 @@
             font-weight: bold;
         }
 
-        .navbar .logo i {
-            margin-right: 10px;
-            font-size: 2.2rem;
-            color: #f39c12;
-        }
-
         .nav-links {
             list-style: none;
             display: flex;
         }
 
         .nav-links li {
+            padding-top: 10px;
             margin-left: 2rem;
         }
 
@@ -66,10 +60,6 @@
 
         .nav-links a:hover {
             color: #f39c12;
-        }
-
-        .nav-links i {
-            margin-right: 0.5rem;
         }
 
         .burger {
@@ -120,7 +110,6 @@
         /* Hero Section */
         .hero {
             height: 100vh;
-            background: url('https://images.unsplash.com/photo-1504307651254-35680f356dfd?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80') no-repeat center center/cover;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -202,12 +191,6 @@
             box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
         }
 
-        .feature-card i {
-            font-size: 2.5rem;
-            color: #f39c12;
-            margin-bottom: 1rem;
-        }
-
         .feature-card h3 {
             font-size: 1.5rem;
             margin-bottom: 1rem;
@@ -252,14 +235,13 @@
 <!-- Navbar -->
 <nav class="navbar">
     <div class="logo">
-        <i class="fas fa-building"></i>
         <span>ConstructionXpert</span>
     </div>
     <ul class="nav-links">
-        <li><a href="index.jsp"><i class="fas fa-home"></i> Accueil</a></li>
-        <li><a href="<%=request.getContextPath()%>/projet?action=listprojet"><i class="fas fa-building"></i> Projets</a></li>
-        <li><a href="<%=request.getContextPath()%>/ressource?action=listressource"><i class="fas fa-box"></i> Ressources</a></li>
-        <li><a href="<%=request.getContextPath()%>/tache?action=listtache"><i class="fas fa-tasks"></i> Tâches</a></li>
+        <li><a href="index.jsp">Accueil</a></li>
+        <li><a href="<%=request.getContextPath()%>/projet?action=listprojet">Projets</a></li>
+        <li><a href="<%=request.getContextPath()%>/ressource?action=listressource">Ressources</a></li>
+        <li><a href="<%=request.getContextPath()%>/tache?action=listtache">Tâches</a></li>
     </ul>
     <div class="burger">
         <div class="line1"></div>
@@ -282,17 +264,14 @@
     <h2>Nos Fonctionnalités</h2>
     <div class="feature-grid">
         <div class="feature-card animate-on-scroll">
-            <i class="fas fa-building"></i>
             <h3>Gestion des Projets</h3>
             <p>Planifiez, suivez et gérez vos projets de construction en toute simplicité.</p>
         </div>
         <div class="feature-card animate-on-scroll">
-            <i class="fas fa-box"></i>
             <h3>Gestion des Ressources</h3>
             <p>Optimisez l'utilisation de vos ressources matérielles et humaines.</p>
         </div>
         <div class="feature-card animate-on-scroll">
-            <i class="fas fa-tasks"></i>
             <h3>Gestion des Tâches</h3>
             <p>Assignez et suivez les tâches pour une exécution fluide.</p>
         </div>

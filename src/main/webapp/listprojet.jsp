@@ -9,8 +9,6 @@
     <title>Gestion des Projets - ConstructionXpert</title>
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <!-- Font Awesome -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
         * {
             margin: 0;
@@ -28,7 +26,7 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            background-color: #333;
+            background-image: linear-gradient(to right,rgb(98, 173, 32), rgb(115, 115, 115));
             padding: 1rem 2rem;
             position: fixed;
             width: 100%;
@@ -43,15 +41,10 @@
             font-size: 1.5rem;
         }
 
-        .logo i {
-            margin-right: 10px;
-            font-size: 2rem;
-            color: #f39c12;
-        }
-
         .nav-links {
             display: flex;
             list-style: none;
+            padding-top: 10px;
         }
 
         .nav-links li {
@@ -67,10 +60,6 @@
 
         .nav-links a:hover {
             color: #f39c12;
-        }
-
-        .nav-links i {
-            margin-right: 0.5rem;
         }
 
         .burger {
@@ -126,17 +115,6 @@
             transform: translateX(0%);
         }
 
-        @keyframes navLinkFade {
-            from {
-                opacity: 0;
-                transform: translateX(50px);
-            }
-            to {
-                opacity: 1;
-                transform: translateX(0px);
-            }
-        }
-
         .table-container {
             padding: 2rem;
             overflow-x: auto;
@@ -188,10 +166,6 @@
             background-color: #e67e22;
         }
 
-        .add-project-button i {
-            margin-right: 8px;
-        }
-
         .action-btn {
             padding: 5px 10px;
             margin-right: 5px;
@@ -224,15 +198,13 @@
 <body>
 <nav class="navbar">
     <div class="logo">
-        <i class="fas fa-building"></i>
         <span>ConstructionXpert</span>
     </div>
     <ul class="nav-links">
-        <li><a href="index.jsp"><i class="fas fa-home"></i> Accueil</a></li>
-        <li><a href="<%=request.getContextPath()%>/projet?action=listprojet"><i class="fas fa-building"></i> Projets</a></li>
-        <li><a href="<%=request.getContextPath()%>/ressource?action=listressource"><i class="fas fa-box"></i> Ressources</a></li>
-        <li><a href="<%=request.getContextPath()%>/tache?action=listtache"><i class="fas fa-tasks"></i> Tâches</a></li>
-
+        <li><a href="index.jsp">Accueil</a></li>
+        <li><a href="<%=request.getContextPath()%>/projet?action=listprojet">Projets</a></li>
+        <li><a href="<%=request.getContextPath()%>/ressource?action=listressource">Ressources</a></li>
+        <li><a href="<%=request.getContextPath()%>/tache?action=listtache">Tâches</a></li>
     </ul>
     <div class="burger">
         <div class="line1"></div>
@@ -243,7 +215,7 @@
 
 <div class="table-container">
     <button class="add-project-button" data-bs-toggle="modal" data-bs-target="#projetModal" onclick="resetModal()">
-        <i class="fas fa-plus"></i> Ajouter un projet
+        Ajouter un projet
     </button>
 
     <table>
@@ -272,8 +244,8 @@
             <td><%= projet.getDateFin() %></td>
             <td><%= projet.getBudget() %></td>
             <td class="actions" style="width: 150px;">
-                <button class="action-btn edit-btn" onclick="fillModal('<%= projet.getIdProjet() %>', '<%= projet.getNomProjet() %>', '<%= projet.getDescription() %>', '<%= projet.getDateDebut() %>', '<%= projet.getDateFin() %>', '<%= projet.getBudget() %>')" data-bs-toggle="modal" data-bs-target="#projetModal"><i class="fas fa-edit"></i></button>
-                <button class="action-btn delete-btn" onclick="if(confirm('Confirmer la suppression ?')) window.location.href='<%=request.getContextPath()%>/projet?action=deleteprojet&id=<%=projet.getIdProjet()%>'"><i class="fas fa-trash-alt"></i></button>
+                <button class="action-btn edit-btn" onclick="fillModal('<%= projet.getIdProjet() %>', '<%= projet.getNomProjet() %>', '<%= projet.getDescription() %>', '<%= projet.getDateDebut() %>', '<%= projet.getDateFin() %>', '<%= projet.getBudget() %>')" data-bs-toggle="modal" data-bs-target="#projetModal">Modifier</button>
+                <button class="action-btn delete-btn" onclick="if(confirm('Confirmer la suppression ?')) window.location.href='<%=request.getContextPath()%>/projet?action=deleteprojet&id=<%=projet.getIdProjet()%>'">Supprimer</button>
             </td>
         </tr>
         <%
@@ -344,31 +316,3 @@
             burger.classList.toggle('toggle');
         });
     }
-
-    navSlide();
-
-    function fillModal(id, nomProjet, description, dateDebut, datefin, budget) {
-        document.getElementById('projetModalLabel').innerText = 'Modifier un projet';
-        document.getElementById('idProjet').value = id;
-        document.getElementById('nomProjet').value = nomProjet;
-        document.getElementById('description').value = description;
-        document.getElementById('dateDebut').value = dateDebut;
-        document.getElementById('datefin').value = datefin;
-        document.getElementById('budget').value = budget;
-        document.getElementById('projetForm').action = '<%=request.getContextPath()%>/projet?action=updateprojet';
-        console.log("Modal rempli : ID=" + id + ", Nom=" + nomProjet + ", Action=" + document.getElementById('projetForm').action);
-    }
-
-    function resetModal() {
-        document.getElementById('projetModalLabel').innerText = 'Ajouter un projet';
-        document.getElementById('idProjet').value = '';
-        document.getElementById('nomProjet').value = '';
-        document.getElementById('description').value = '';
-        document.getElementById('dateDebut').value = '';
-        document.getElementById('datefin').value = '';
-        document.getElementById('budget').value = '';
-        document.getElementById('projetForm').action = '<%=request.getContextPath()%>/projet?action=createprojet';
-    }
-</script>
-</body>
-</html>
