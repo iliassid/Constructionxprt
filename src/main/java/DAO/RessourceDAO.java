@@ -22,19 +22,9 @@ public class RessourceDAO {
                     "quantite INT NOT NULL, " +
                     "fournisseur VARCHAR(100) NOT NULL " +
                     ")";
-            String createTacheRessourceTable = "CREATE TABLE IF NOT EXISTS tache_ressource (" +
-                    "id_tache INT, " +
-                    "id_ressource INT, " +
-                    "quantite INT NOT NULL, " +
-                    "PRIMARY KEY (id_tache, id_ressource), " +
-                    "FOREIGN KEY (id_tache) REFERENCES tache(id_tache) ON DELETE CASCADE, " +
-                    "FOREIGN KEY (id_ressource) REFERENCES ressource(id_ressource) ON DELETE CASCADE" +
-                    ")";
-
             try (Statement statement = connection.createStatement()) {
                 statement.executeUpdate(createTableSQL);
-                statement.executeUpdate(createTacheRessourceTable);
-                System.out.println("Tables 'ressource' et 'tache_ressource' prêtes.");
+                System.out.println("Table 'ressource' prête.");
             }
         } catch (ClassNotFoundException | SQLException e) {
             System.err.println("Database connection error: " + e.getMessage());
@@ -122,53 +112,6 @@ public class RessourceDAO {
             System.out.println("Ressource supprimée avec succès !");
         } catch (SQLException e) {
             System.out.println("Erreur lors de la suppression de la ressource: " + e.getMessage());
-        }
-    }
-
-    // Nouvelle méthode pour assigner une ressource à une tâche
-    public void assignerRessource(int idTache, int idRessource, int quantite) throws SQLException {
-        connection.setAutoCommit(false); // Début de la transaction
-        try {
-            // Vérifier la quantité disponible
-            String checkQuery = "SELECT quantite FROM ressource WHERE id_ressource = ?";
-            try (PreparedStatement checkStmt = connection.prepareStatement(checkQuery)) {
-                checkStmt.setInt(1, idRessource);
-                ResultSet rs = checkStmt.executeQuery();
-                if (rs.next()) {
-                    int quantiteDisponible = rs.getInt("quantite");
-                    if (quantiteDisponible < quantite) {
-                        throw new SQLException("Quantité insuffisante pour la ressource ID " + idRessource);
-                    }
-                } else {
-                    throw new SQLException("Ressource ID " + idRessource + " non trouvée");
-                }
-            }
-
-            // Insérer dans tache_ressource
-            String insertQuery = "INSERT INTO tache_ressource (id_tache, id_ressource, quantite) VALUES (?, ?, ?) " +
-                    "ON DUPLICATE KEY UPDATE quantite = quantite + VALUES(quantite)";
-            try (PreparedStatement insertStmt = connection.prepareStatement(insertQuery)) {
-                insertStmt.setInt(1, idTache);
-                insertStmt.setInt(2, idRessource);
-                insertStmt.setInt(3, quantite);
-                insertStmt.executeUpdate();
-            }
-
-            // Mettre à jour la quantité dans ressource
-            String updateQuery = "UPDATE ressource SET quantite = quantite - ? WHERE id_ressource = ?";
-            try (PreparedStatement updateStmt = connection.prepareStatement(updateQuery)) {
-                updateStmt.setInt(1, quantite);
-                updateStmt.setInt(2, idRessource);
-                updateStmt.executeUpdate();
-            }
-
-            connection.commit(); // Valider la transaction
-            System.out.println("Ressource assignée à la tâche ID " + idTache + " avec succès !");
-        } catch (SQLException e) {
-            connection.rollback(); // Annuler en cas d'erreur
-            throw e;
-        } finally {
-            connection.setAutoCommit(true); // Réactiver l'auto-commit
         }
     }
 }

@@ -7,192 +7,50 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Gestion des Projets - ConstructionXpert</title>
-    <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: 'Arial', sans-serif;
-            background-color: #f4f4f4;
-            padding-top: 80px;
-        }
-
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Arial', sans-serif; background-color: #f4f4f4; padding-top: 80px; }
         .navbar {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            background-image: linear-gradient(to right,rgb(98, 173, 32), rgb(115, 115, 115));
-            padding: 1rem 2rem;
-            position: fixed;
-            width: 100%;
-            top: 0;
-            z-index: 1000;
+            display: flex; justify-content: space-between; align-items: center;
+            background-image: linear-gradient(to right, rgb(98, 173, 32), rgb(115, 115, 115));
+            padding: 1rem 2rem; position: fixed; width: 100%; top: 0; z-index: 1000;
         }
-
-        .logo {
-            display: flex;
-            align-items: center;
-            color: #fff;
-            font-size: 1.5rem;
-        }
-
-        .nav-links {
-            display: flex;
-            list-style: none;
-            padding-top: 10px;
-        }
-
-        .nav-links li {
-            margin-left: 2rem;
-        }
-
-        .nav-links a {
-            color: #fff;
-            text-decoration: none;
-            font-size: 1.1rem;
-            transition: color 0.3s ease;
-        }
-
-        .nav-links a:hover {
-            color: #f39c12;
-        }
-
-        .burger {
-            display: none;
-            cursor: pointer;
-        }
-
-        .burger div {
-            width: 25px;
-            height: 3px;
-            background-color: #fff;
-            margin: 5px;
-            transition: all 0.3s ease;
-        }
-
-        .toggle .line1 {
-            transform: rotate(-45deg) translate(-5px, 6px);
-        }
-
-        .toggle .line2 {
-            opacity: 0;
-        }
-
-        .toggle .line3 {
-            transform: rotate(45deg) translate(-5px, -6px);
-        }
-
+        .logo { display: flex; align-items: center; color: #fff; font-size: 1.5rem; }
+        .nav-links { display: flex; list-style: none; padding-top: 10px; }
+        .nav-links li { margin-left: 2rem; }
+        .nav-links a { color: #fff; text-decoration: none; font-size: 1.1rem; transition: color 0.3s ease; }
+        .nav-links a:hover { color: #f39c12; }
+        .burger { display: none; cursor: pointer; }
+        .burger div { width: 25px; height: 3px; background-color: #fff; margin: 5px; transition: all 0.3s ease; }
+        .toggle .line1 { transform: rotate(-45deg) translate(-5px, 6px); }
+        .toggle .line2 { opacity: 0; }
+        .toggle .line3 { transform: rotate(45deg) translate(-5px, -6px); }
         @media screen and (max-width: 768px) {
-            .nav-links {
-                position: absolute;
-                right: 0;
-                height: 100vh;
-                top: 8vh;
-                background-color: #333;
-                display: flex;
-                flex-direction: column;
-                align-items: center;
-                width: 50%;
-                transform: translateX(100%);
-                transition: transform 0.5s ease-in;
-            }
-
-            .nav-links li {
-                opacity: 0;
-            }
-
-            .burger {
-                display: block;
-            }
+            .nav-links { position: absolute; right: 0; height: 100vh; top: 8vh;
+                background-color: #333; flex-direction: column; align-items: center; width: 50%;
+                transform: translateX(100%); transition: transform 0.5s ease-in; }
+            .nav-links li { opacity: 0; }
+            .burger { display: block; }
         }
-
-        .nav-active {
-            transform: translateX(0%);
-        }
-
-        .table-container {
-            padding: 2rem;
-            overflow-x: auto;
-        }
-
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            background-color: #fff;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            border-radius: 8px;
-            overflow: hidden;
-        }
-
-        th, td {
-            padding: 12px 15px;
-            text-align: left;
-            border-bottom: 1px solid #ddd;
-        }
-
-        th {
-            background-color: #333;
-            color: #fff;
-            font-weight: bold;
-        }
-
-        tr:hover {
-            background-color: #f5f5f5;
-        }
-
-        tr:nth-child(even) {
-            background-color: #f9f9f9;
-        }
-
-        .add-project-button {
-            display: inline-block;
-            margin: 1rem 2rem;
-            padding: 10px 20px;
-            background-color: #f39c12;
-            color: #fff;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            font-size: 1rem;
-            transition: background-color 0.3s ease;
-        }
-
-        .add-project-button:hover {
-            background-color: #e67e22;
-        }
-
-        .action-btn {
-            padding: 5px 10px;
-            margin-right: 5px;
-            border-radius: 5px;
-            text-decoration: none;
-            color: #fff;
-            border: none;
-            cursor: pointer;
-        }
-
-        .edit-btn {
-            background-color: #f39c12;
-        }
-
-        .edit-btn:hover {
-            background-color: #e67e22;
-            color: #fff;
-        }
-
-        .delete-btn {
-            background-color: #e74c3c;
-        }
-
-        .delete-btn:hover {
-            background-color: #c0392b;
-            color: #fff;
-        }
+        .nav-active { transform: translateX(0%); }
+        .table-container { padding: 2rem; overflow-x: auto; }
+        table { width: 100%; border-collapse: collapse; background-color: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); border-radius: 8px; overflow: hidden; }
+        th, td { padding: 12px 15px; text-align: left; border-bottom: 1px solid #ddd; }
+        th { background-color: #333; color: #fff; font-weight: bold; }
+        tr:hover { background-color: #f5f5f5; }
+        tr:nth-child(even) { background-color: #f9f9f9; }
+        .add-project-button { display: inline-block; margin: 1rem 2rem; padding: 10px 20px;
+            background-color: #f39c12; color: #fff; border: none; border-radius: 5px;
+            cursor: pointer; font-size: 1rem; transition: background-color 0.3s ease; }
+        .add-project-button:hover { background-color: #e67e22; }
+        .action-btn { padding: 5px 10px; margin-right: 5px; border-radius: 5px;
+            text-decoration: none; color: #fff; border: none; cursor: pointer; }
+        .edit-btn { background-color: #f39c12; }
+        .edit-btn:hover { background-color: #e67e22; color: #fff; }
+        .delete-btn { background-color: #e74c3c; }
+        .delete-btn:hover { background-color: #c0392b; color: #fff; }
     </style>
 </head>
 <body>
@@ -316,3 +174,30 @@
             burger.classList.toggle('toggle');
         });
     }
+
+    navSlide();
+
+    function fillModal(id, nomProjet, description, dateDebut, dateFin, budget) {
+        document.getElementById('projetModalLabel').innerText = 'Modifier un projet';
+        document.getElementById('idProjet').value = id;
+        document.getElementById('nomProjet').value = nomProjet;
+        document.getElementById('description').value = description;
+        document.getElementById('dateDebut').value = dateDebut;
+        document.getElementById('datefin').value = dateFin;
+        document.getElementById('budget').value = budget;
+        document.getElementById('projetForm').action = '<%=request.getContextPath()%>/projet?action=updateprojet';
+    }
+
+    function resetModal() {
+        document.getElementById('projetModalLabel').innerText = 'Ajouter un projet';
+        document.getElementById('idProjet').value = '';
+        document.getElementById('nomProjet').value = '';
+        document.getElementById('description').value = '';
+        document.getElementById('dateDebut').value = '';
+        document.getElementById('datefin').value = '';
+        document.getElementById('budget').value = '';
+        document.getElementById('projetForm').action = '<%=request.getContextPath()%>/projet?action=createprojet';
+    }
+</script>
+</body>
+</html>

@@ -115,7 +115,7 @@ public class ProjetDAO {
             System.out.println("Projet mis à jour avec succès ! " + rowsAffected + " ligne(s) affectée(s).");
         } catch (SQLException e) {
             System.out.println("Erreur lors de la mise à jour du projet : " + e.getMessage());
-            e.printStackTrace(); // Ajout pour voir la stacktrace complète
+            e.printStackTrace();
         }
     }
 }
